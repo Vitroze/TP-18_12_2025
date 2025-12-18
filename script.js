@@ -5,6 +5,13 @@ oDisplay.textContent = "";
 oHistory.textContent = "Historique :\n";
 oButtons = oCalculator.querySelectorAll("button");
 
+function safeEval(expression) {
+  if (/^[0-9+\-*/().\s]+$/.test(expression)) {
+    return eval(expression);
+  }
+  throw new Error("Invalid characters in expression");
+}
+
 let bResult = false;
 oButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
@@ -16,7 +23,7 @@ oButtons.forEach((button) => {
       oDisplay.textContent = "";
     } else if (btnValue === "equal") {
       try {
-        const sValue = eval(oDisplay.textContent);
+        const sValue = safeEval(oDisplay.textContent);
         oHistory.textContent += oDisplay.textContent + " = " + sValue + "; ";
         oDisplay.textContent = sValue;
       } catch {
