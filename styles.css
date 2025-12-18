@@ -1,9 +1,6 @@
-html {
+body {
   margin: 0;
   padding: 0;
-}
-
-body {
   background: #3f5efb;
   background: linear-gradient(
     nulldeg,
@@ -72,7 +69,7 @@ button {
   background-color: #f2f2f2;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: 102px;
+  min-width: 100px;
   height: 95px;
 }
 
@@ -81,12 +78,10 @@ button:hover {
 }
 
 .ce {
-  width: 235px;
   grid-column: span 2;
 }
 
 .equal {
-  width: 235px;
   grid-column: span 2;
   background: #3f5efb;
   background: linear-gradient(
