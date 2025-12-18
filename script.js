@@ -12,34 +12,53 @@ function safeEval(expression) {
   throw new Error("Invalid characters in expression");
 }
 
+function action(sID) {
+  if (sID === "c") {
+    oDisplay.textContent = "";
+  } else if (sID === "ce") {
+    oDisplay.textContent = oDisplay.textContent.slice(0, -1);
+  } else if (sID === "equal") {
+    try {
+      const sValue = safeEval(oDisplay.textContent);
+      oHistory.textContent += oDisplay.textContent + " = " + sValue + "; ";
+      oDisplay.textContent = sValue;
+    } catch {
+      oDisplay.textContent = "Error";
+    }
+
+    bResult = true;
+  } else {
+    if (bResult) {
+      oDisplay.textContent = "";
+      bResult = false;
+    }
+
+    oDisplay.textContent += sID;
+  }
+}
+
 let bResult = false;
 oButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
     const btnValue = e.target.className;
 
-    console.log(`Button ${btnValue} clicked`);
-
-    if (btnValue === "c") {
-      oDisplay.textContent = "";
-    } else if (btnValue === "equal") {
-      try {
-        const sValue = safeEval(oDisplay.textContent);
-        oHistory.textContent += oDisplay.textContent + " = " + sValue + "; ";
-        oDisplay.textContent = sValue;
-      } catch {
-        oDisplay.textContent = "Error";
-      }
-
-      bResult = true;
-    } else {
-      if (bResult) {
-        oDisplay.textContent = "";
-        bResult = false;
-      }
-
-      oDisplay.textContent += btnValue;
-    }
-
-    console.log(`Display updated to: ${oDisplay.textContent}`);
+    action(btnValue);
   });
+});
+
+document.addEventListener("keydown", (e) => {
+  const key = e.key;
+
+  if ((key >= "0" && key <= "9") || "+-*/.".includes(key)) {
+    action(key);
+  } else if (key === "Enter") {
+    action("equal");
+  } else if (key === "Backspace") {
+    action("ce");
+  } else if (key === "c") {
+    action("c");
+  } else if (key === "F9") {
+    oHistory.textContent = "Historique :\n";
+    alert("Historique effacé.");
+  }
 });
