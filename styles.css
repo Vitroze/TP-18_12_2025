@@ -61,19 +61,18 @@ body {
 .calculator-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 20px;
+  grid-gap: 30px;
   height: 595px;
 }
 
 button {
   font-size: 2rem;
   border: none;
-  border-radius: 20px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   background-color: #f2f2f2;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  width: 95px;
+  width: 102px;
   height: 95px;
 }
 
@@ -89,4 +88,10 @@ button:hover {
 .equal {
   width: 235px;
   grid-column: span 2;
+  background: #3f5efb;
+  background: linear-gradient(
+    256deg,
+    rgba(63, 94, 251, 1) 0%,
+    rgba(252, 70, 107, 1) 100%
+  );
 }
