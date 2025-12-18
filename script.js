@@ -50,6 +50,7 @@ document.addEventListener("keydown", (e) => {
   const key = e.key;
 
   if ((key >= "0" && key <= "9") || "+-*/.".includes(key)) {
+    e.preventDefault();
     action(key);
   } else if (key === "Enter") {
     action("equal");
